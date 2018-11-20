@@ -16,7 +16,7 @@ Nginx 入口应为 `/public` 目录，以下仅供参考：
 server
 {
     listen 80;
-	listen 443 ssl http2;
+    listen 443 ssl http2;
     server_name gh-oauth.openapi.link;
     index index.php index.html index.htm default.php default.htm default.html;
     root /www/wwwroot/gh-oauth.openapi.link/public;
