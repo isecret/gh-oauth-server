@@ -3,19 +3,24 @@ require '../run.php';
 
 use GuzzleHttp\Client;
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Method: *');
-header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
-header('Content-Type: application/json');
+if (server('REQUEST_METHOD') == 'POST') {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Method: *');
+    header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    header('Content-Type: application/json');
 
-$http = new Client();
+    $http = new Client();
 
-$response = $http->request('POST', 'https://github.com/login/oauth/access_token', [
-    'headers' => [
-        'Accept' => 'application/json',
-        'User-Agent' => 'gh-oauth-server',
-    ],
-    'form_params' => post()
-]);
+    $response = $http->request('POST', 'https://github.com/login/oauth/access_token', [
+        'headers' => [
+            'Accept' => 'application/json',
+            'User-Agent' => 'gh-oauth-server',
+        ],
+        'form_params' => post()
+    ]);
 
-e($response->getBody()->getContents());
+    e($response->getBody()->getContents());
+} else {
+    
+    e('Hello World');
+}
